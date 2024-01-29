@@ -2,7 +2,7 @@
 /**
  * handle_d_i - d and i specifier
  * @fd: integer
- * @alx: variadic function
+ * @nume: variadic function
  */
 
 void handle_d_i(int fd, int nume)
@@ -15,8 +15,7 @@ void handle_d_i(int fd, int nume)
 		write(fd, "-", 1);
 		nume = -nume;
 	}
-	do
-	{
+	do {
 		str[i++] = nume % 10 + '0';
 		nume /= 10;
 	} while (nume != 0);

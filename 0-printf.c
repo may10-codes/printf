@@ -1,8 +1,8 @@
 #include "main.h"
 /**
- * print_binary - Prints a binary representation of an unsigned int.
- * @n: Unsigned int to be converted to binary.
- * @fd: File descriptor to write to (stdout in this case).
+ * _printf - creating a custom printf
+ * @format: string format
+ * Return: 0
  */
 int _printf(const char *format, ...)
 {
@@ -53,5 +53,5 @@ int _printf(const char *format, ...)
 		format++;
 	}
 	va_end(alx);
-	return num;
+	return (num);
 }
