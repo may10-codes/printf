@@ -1,22 +1,9 @@
 #include "main.h"
-
 /**
  * _printf - custom printf
  * @format: printf format
  * Return: 0
  */
-
-void print_binary(unsigned int n, int fd)
-{
-	char digit;
-
-	if (n > 1)
-	{
-		print_binary(n / 2, fd);
-	}
-	digit = (n % 2) + '0';
-	write(fd, &digit, sizeof(char));
-}
 int _printf(const char *format, ...)
 {
 	unsigned int binary_arg;
@@ -35,18 +22,13 @@ int _printf(const char *format, ...)
 			if (*format == 'c')
 			{
 				c =  va_arg(alx, int);
-				write (fd, &c, sizeof(char));
+				write(fd, &c, sizeof(char));
 				num++;
 			}
 			else if (*format == 's')
 			{
 				s = va_arg(alx, char *);
-				while (*s != '\0')
-				{
-					write (fd, s, sizeof(char));
-					s++;
-					num++;
-				}
+				print_string(s, fd, &num);
 			}
 			else if (*format == 'b')
 			{
@@ -56,7 +38,7 @@ int _printf(const char *format, ...)
 			}
 			else if (*format == '%')
 			{
-				write (fd, "%", sizeof(char));
+				write(fd, "%", sizeof(char));
 				num++;
 			}
 		}
