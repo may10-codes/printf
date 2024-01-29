@@ -1,19 +1,39 @@
 #include "main.h"
 /**
- * _printf - custom printf
- * @format: printf format
- * Return: 0
+ * print_binary - Prints a binary representation of an unsigned int.
+ * @n: Unsigned int to be converted to binary.
+ * @fd: File descriptor to write to (stdout in this case).
  */
+<<<<<<< HEAD
+=======
+void print_binary(unsigned int n, int fd)
+{
+	char digit;
+
+	if (n > 1)
+		print_binary(n / 2, fd);
+
+	digit = (n % 2) + '0';
+	write(fd, &digit, sizeof(char));
+}
+
+/**
+ * _printf - Custom printf function.
+ * @format: Format string with conversion specifiers.
+ *
+ * Return: Number of characters printed (excluding null byte).
+ */
+>>>>>>> 44b35cf9e7dcbb1c04ad1d9ff4fee7af2d4de0a7
 int _printf(const char *format, ...)
 {
 	unsigned int binary_arg;
-	va_list alx;
+	va_list args;
 	char c;
 	char *s;
-	int fd = 1;
+	int fd = 1; /* Default file descriptor is STDOUT */
 	int num = 0;
 
-	va_start(alx, format);
+	va_start(args, format);
 	while (*format != '\0')
 	{
 		if (*format == '%')
@@ -21,19 +41,28 @@ int _printf(const char *format, ...)
 			format++;
 			if (*format == 'c')
 			{
+<<<<<<< HEAD
 				c =  va_arg(alx, int);
+=======
+				c = va_arg(args, int);
+>>>>>>> 44b35cf9e7dcbb1c04ad1d9ff4fee7af2d4de0a7
 				write(fd, &c, sizeof(char));
 				num++;
 			}
 			else if (*format == 's')
 			{
+<<<<<<< HEAD
 				s = va_arg(alx, char *);
 				print_string(s, fd, &num);
+=======
+				s = va_arg(args, char *);
+				while (*s != '\0') { write(fd, s++, sizeof(char)); num++; }
+>>>>>>> 44b35cf9e7dcbb1c04ad1d9ff4fee7af2d4de0a7
 			}
 			else if (*format == 'b')
 			{
-				binary_arg = va_arg(alx, unsigned int);
-				print_binary(binary_arg, 1);
+				binary_arg = va_arg(args, unsigned int);
+				print_binary(binary_arg, fd);
 				num++;
 			}
 			else if (*format == '%')
@@ -44,11 +73,12 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			write(1, format, sizeof(char));
+			write(fd, format, sizeof(char));
 			num++;
 		}
 		format++;
 	}
-	va_end(alx);
-	return (num);
+	va_end(args);
+	return num;
 }
+
