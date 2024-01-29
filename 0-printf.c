@@ -70,3 +70,32 @@ int _printf(const char *format, ...)
 	va_end(alx);
 	return (num);
 }
+
+/**
+ * print_number - prints an integer
+ * @n: integer to print
+ * @fd: file descriptor
+ */
+void print_number(int n, int fd)
+{
+	if (n / 10)
+		print_number(n / 10, fd);
+	write(fd, &"0123456789"[n % 10], sizeof(char));
+}
+
+/**
+ * count_digits - counts the number of digits in an integer
+ * @n: integer to count digits of
+ * Return: number of digits
+ */
+int count_digits(int n)
+{
+	int count = 0;
+
+	while (n)
+	{
+		count++;
+		n /= 10;
+	}
+	return (count);
+}
