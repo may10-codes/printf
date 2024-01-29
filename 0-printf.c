@@ -12,6 +12,7 @@ int _printf(const char *format, ...)
 	char *s;
 	int fd = 1;
 	int num = 0;
+	int d;
 
 	va_start(alx, format);
 	while (*format != '\0')
@@ -26,7 +27,9 @@ int _printf(const char *format, ...)
 			}
 			else if (*format == 'd' || *format == 'i')
 			{
-				handle_d_i(1, alx);
+				d = va_arg(alx, int);
+				handle_d_i(1, d);
+				num++;
 			}
 			else if (*format == 's')
 			{

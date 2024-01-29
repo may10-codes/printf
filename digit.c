@@ -5,12 +5,25 @@
  * @alx: variadic function
  */
 
-void handle_d_i(int fd, va_list alx)
+void handle_d_i(int fd, int nume)
 {
-	int num;
-	char num_char;
+	int i = 0;
+	char str[12];
 
-	num = va_arg(alx, int);
-	num_char = num + '0';
-	write(fd, &num_char, sizeof(int));
+	if (nume < 0)
+	{
+		write(fd, "-", 1);
+		nume = -nume;
+	}
+	do
+	{
+		str[i++] = nume % 10 + '0';
+		nume /= 10;
+	} while (nume != 0);
+
+	while (i > 0)
+	{
+		write(fd, &str[--i], 1);
+	}
+
 }
