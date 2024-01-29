@@ -1,23 +1,26 @@
 #include "main.h"
 
 /**
- * print_binary - Prints a binary number.
- * @n: Binary number to print.
- * @fd: File descriptor.
+ * print_binary - Prints a binary representation of an unsigned int.
+ * @n: Unsigned int to be converted to binary.
+ * @fd: File descriptor to write to (stdout in this case).
  */
 void print_binary(unsigned int n, int fd)
 {
 	char digit;
+
 	if (n > 1)
 		print_binary(n / 2, fd);
+
 	digit = (n % 2) + '0';
 	write(fd, &digit, sizeof(char));
 }
 
 /**
  * _printf - Custom printf function.
- * @format: Printf format.
- * Return: Number of characters printed.
+ * @format: Format string with conversion specifiers.
+ *
+ * Return: Number of characters printed (excluding null byte).
  */
 int _printf(const char *format, ...)
 {
@@ -43,12 +46,7 @@ int _printf(const char *format, ...)
 			else if (*format == 's')
 			{
 				s = va_arg(args, char *);
-				while (*s != '\0')
-				{
-					write(fd, s, sizeof(char));
-					s++;
-					num++;
-				}
+				while (*s != '\0') { write(fd, s++, sizeof(char)); num++; }
 			}
 			else if (*format == 'b')
 			{
@@ -71,33 +69,5 @@ int _printf(const char *format, ...)
 	}
 	va_end(args);
 	return num;
-}
-
-/**
- * print_number - Prints an integer.
- * @n: Integer to print.
- * @fd: File descriptor.
- */
-void print_number(int n, int fd)
-{
-	if (n / 10)
-		print_number(n / 10, fd);
-	write(fd, &"0123456789"[n % 10], sizeof(char));
-}
-
-/**
- * count_digits - Counts the number of digits in an integer.
- * @n: Integer to count digits of.
- * Return: Number of digits.
- */
-int count_digits(int n)
-{
-	int count = 0;
-	while (n)
-	{
-		count++;
-		n /= 10;
-	}
-	return count;
 }
 
