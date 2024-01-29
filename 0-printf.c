@@ -1,32 +1,34 @@
 #include "main.h"
 
 /**
- * _printf - custom printf
- * @format: printf format
- * Return: 0
+ * print_binary - Prints a binary number.
+ * @n: Binary number to print.
+ * @fd: File descriptor.
  */
-
 void print_binary(unsigned int n, int fd)
 {
 	char digit;
-
 	if (n > 1)
-	{
 		print_binary(n / 2, fd);
-	}
 	digit = (n % 2) + '0';
 	write(fd, &digit, sizeof(char));
 }
+
+/**
+ * _printf - Custom printf function.
+ * @format: Printf format.
+ * Return: Number of characters printed.
+ */
 int _printf(const char *format, ...)
 {
 	unsigned int binary_arg;
-	va_list alx;
+	va_list args;
 	char c;
 	char *s;
-	int fd = 1;
+	int fd = 1; /* Default file descriptor is STDOUT */
 	int num = 0;
 
-	va_start(alx, format);
+	va_start(args, format);
 	while (*format != '\0')
 	{
 		if (*format == '%')
@@ -34,47 +36,47 @@ int _printf(const char *format, ...)
 			format++;
 			if (*format == 'c')
 			{
-				c =  va_arg(alx, int);
-				write (fd, &c, sizeof(char));
+				c = va_arg(args, int);
+				write(fd, &c, sizeof(char));
 				num++;
 			}
 			else if (*format == 's')
 			{
-				s = va_arg(alx, char *);
+				s = va_arg(args, char *);
 				while (*s != '\0')
 				{
-					write (fd, s, sizeof(char));
+					write(fd, s, sizeof(char));
 					s++;
 					num++;
 				}
 			}
 			else if (*format == 'b')
 			{
-				binary_arg = va_arg(alx, unsigned int);
-				print_binary(binary_arg, 1);
+				binary_arg = va_arg(args, unsigned int);
+				print_binary(binary_arg, fd);
 				num++;
 			}
 			else if (*format == '%')
 			{
-				write (fd, "%", sizeof(char));
+				write(fd, "%", sizeof(char));
 				num++;
 			}
 		}
 		else
 		{
-			write(1, format, sizeof(char));
+			write(fd, format, sizeof(char));
 			num++;
 		}
 		format++;
 	}
-	va_end(alx);
-	return (num);
+	va_end(args);
+	return num;
 }
 
 /**
- * print_number - prints an integer
- * @n: integer to print
- * @fd: file descriptor
+ * print_number - Prints an integer.
+ * @n: Integer to print.
+ * @fd: File descriptor.
  */
 void print_number(int n, int fd)
 {
@@ -84,18 +86,18 @@ void print_number(int n, int fd)
 }
 
 /**
- * count_digits - counts the number of digits in an integer
- * @n: integer to count digits of
- * Return: number of digits
+ * count_digits - Counts the number of digits in an integer.
+ * @n: Integer to count digits of.
+ * Return: Number of digits.
  */
 int count_digits(int n)
 {
 	int count = 0;
-
 	while (n)
 	{
 		count++;
 		n /= 10;
 	}
-	return (count);
+	return count;
 }
+
