@@ -6,8 +6,20 @@
  * Return: 0
  */
 
+void print_binary(unsigned int n, int fd)
+{
+	char digit;
+
+	if (n > 1)
+	{
+		print_binary(n / 2, fd);
+	}
+	digit = (n % 2) + '0';
+	write(fd, &digit, sizeof(char));
+}
 int _printf(const char *format, ...)
 {
+	unsigned int binary_arg;
 	va_list alx;
 	char c;
 	char *s;
@@ -35,6 +47,12 @@ int _printf(const char *format, ...)
 					s++;
 					num++;
 				}
+			}
+			else if (*format == 'b')
+			{
+				binary_arg = va_arg(alx, unsigned int);
+				print_binary(binary_arg, 1);
+				num++;
 			}
 			else if (*format == '%')
 			{
