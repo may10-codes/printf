@@ -11,8 +11,6 @@ int _printf(const char *format, ...)
 	va_list alx;
 	char c;
 	char *s;
-	int d;
-	int i;
 	int fd = 1;
 	int num = 0;
 
@@ -26,26 +24,6 @@ int _printf(const char *format, ...)
 			{
 				c =  va_arg(alx, int);
 				write (fd, &c, sizeof(char));
-				num++;
-			}
-			else if (*format == 'd')
-			{
-				d = va_arg(alx, int);
-				if (d < 0)
-				{
-					return (-d);
-				}
-				else
-				{
-					return (d);
-				}
-				write(fd, &d, sizeof(int));
-				num++;
-			}
-			else if (*format == 'i')
-			{
-				i = va_arg(alx, int);
-				write (fd, &i, sizeof(int));
 				num++;
 			}
 			else if (*format == 's')
