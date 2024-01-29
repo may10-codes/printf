@@ -5,7 +5,7 @@
  * @format: printf format
  * Return: 0
  */
-size_t _strlen
+
 int _printf(const char *format, ...)
 {
 	va_list alx;
