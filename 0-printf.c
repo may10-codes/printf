@@ -31,10 +31,7 @@ int _printf(const char *format, ...)
 				{
 					write(fd, "(nil)", 5);
 				}
-				else
-				{
-					print_string(s, fd, &num);
-				}
+				print_string(s, fd, &num);
 			}
 			else if (*format == 'd' || *format == 'i')
 			{
