@@ -1,4 +1,3 @@
-#include "main.h"
 /**
  * handle_d_i - d and i specifier
  * @fd: integer
@@ -9,12 +8,6 @@ void handle_d_i(int fd, int nume)
 {
 	int i = 0;
 	char str[12];
-
-	if (nume ==  0)
-	{
-		write(fd, "0", 1);
-		return;
-	}
 
 	if (nume < 0)
 	{
