@@ -39,6 +39,12 @@ int _printf(const char *format, ...)
 				handle_d_i(1, d);
 				num++;
 			}
+			else if (*format == '%')
+			{
+				c = va_arg(alx, int);
+				write(fd, "%", sizeof(char));
+				num++;
+			}
 		}
 		else
 		{
