@@ -41,11 +41,11 @@ int _printf(const char *format, ...)
 				binary_arg = va_arg(alx, unsigned int);
 				print_binary(binary_arg, fd);
 			}
-			else if (*format == 'u')
+			/*	else if (*format == 'u')
 			{
 				print_unsigned(va_arg(alx,unsigned int, write));
 				num++;
-			}
+				}*/
 			else if (*format == '%')
 			{
 				num += write(fd, "%", sizeof(char));
