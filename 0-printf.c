@@ -28,6 +28,12 @@ int _printf(const char *format, ...)
 				s = va_arg(alx, char *);
 				print_string(s, fd, &num);
 			}
+			else if (*format == 'd' || *format == 'i')
+			{
+				num = va_arg(alx, int);
+				handle_d_i(1, num);
+				num++;
+			}
 		}
 		else
 		{
