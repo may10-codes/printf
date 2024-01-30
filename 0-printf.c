@@ -26,11 +26,11 @@ int _printf(const char *format, ...)
 			}
 			else if (*format == 's')
 			{
+				s = va_arg(alx, char *);
 				if (s == NULL)
 				{
-					write(1, "(nil)", 1);
+					write(fd, "(nil)", 5);
 				}
-				s = va_arg(alx, char *);
 				print_string(s, fd, &num);
 			}
 			else if (*format == 'd' || *format == 'i')
