@@ -31,7 +31,10 @@ int _printf(const char *format, ...)
 				{
 					write(fd, "(nil)", 5);
 				}
-				print_string(s, fd, &num);
+				else
+				{
+					print_string(s, fd, &num);
+				}
 			}
 			else if (*format == 'd' || *format == 'i')
 			{
@@ -42,8 +45,7 @@ int _printf(const char *format, ...)
 			else if (*format == '%')
 			{
 				c = va_arg(alx, int);
-				write(fd, "%", sizeof(char));
-				num++;
+				num += write(fd, "%", sizeof(char));
 			}
 		}
 		else
