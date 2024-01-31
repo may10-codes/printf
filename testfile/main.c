@@ -43,6 +43,24 @@ int main(void)
     _printf("Len:[%d]\n", len);
     printf("Len:[%d]\n", len2);
     _printf("Unknown:[%r]\n");
+    len = _printf("%s%c%c%c%s%%%s%c", "Loading ", '.', '.', '.', " 99", " Please wait", '\n');
+    len2 = printf("%s%c%c%c%s%%%s%c", "Loading ", '.', '.', '.', " 99", " Please wait", '\n');
+    fflush(stdout);
+    if (len != len2)
+    {
+	    printf("Lengths differ.\n");
+	    fflush(stdout);
+	    return (1);
+    }
+    len = _printf(NULL);
+    len2 = printf(NULL);
+    fflush(stdout);
+    if (len != len2)
+    {
+	    printf("Lengths differ.\n");
+	    fflush(stdout);
+	    return (1);
+    }
 /*    printf("Unknown:[%r]\n"); */
     return (0);
 }

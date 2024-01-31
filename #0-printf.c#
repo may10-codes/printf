@@ -6,6 +6,7 @@
  */
 int _printf(const char *format, ...)
 {
+
 	va_list alx;
 	char c;
 	char *s;
@@ -27,11 +28,11 @@ int _printf(const char *format, ...)
 			else if (*format == 's')
 			{
 				s = va_arg(alx, char *);
-				/*	if (s == NULL)
+				if (s == NULL)
 				{
 					write(fd, "(nil)", 5);
 				}
-				print_string(s, fd, &num);*/
+				print_string(s, fd, &num);
 			}
 			else if (*format == 'd' || *format == 'i')
 			{
