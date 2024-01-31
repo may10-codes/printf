@@ -30,8 +30,8 @@ int _printf(const char *format, ...)
 				/*	if (s == NULL)
 				{
 					write(fd, "(nil)", 5);
-				}
-				print_string(s, fd, &num);*/
+					}*/
+				print_string(s, fd, &num);
 			}
 			else if (*format == 'd' || *format == 'i')
 			{
